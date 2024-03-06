@@ -8,7 +8,6 @@
 
 
 body {
-  padding: 1rem;
   background-color: rgb(var(--foreground-rgb));
   text-color: rgb(0,0,0);
 }
