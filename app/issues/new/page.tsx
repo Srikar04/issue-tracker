@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { TextField,TextArea } from '@radix-ui/themes';
+import { TextField,TextArea,Button } from '@radix-ui/themes';
 
 const newIssue = () => {
   return (
@@ -10,6 +10,7 @@ const newIssue = () => {
             <TextField.Input placeholder="Title" />
         </TextField.Root>
         <TextArea placeholder="Description"/>
+        <Button>Create new Issue</Button>
     </div>
   )
 }
