@@ -22,7 +22,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (isClientRendered) {
-      console.log(pathname);
+      
     }
   }, [pathname, isClientRendered]);
   
