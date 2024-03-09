@@ -3,6 +3,8 @@
 import { TextField,Button ,Callout} from '@radix-ui/themes';
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
+import { MdError } from "react-icons/md";
+
 
 import { useForm } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
@@ -31,6 +33,9 @@ const newIssue = () => {
     <div className=" max-w-xl space-y-4">
       {error &&
         <Callout.Root color="red">
+          <Callout.Icon>
+            <MdError />
+          </Callout.Icon>
           <Callout.Text>
             {error}
           </Callout.Text> 
