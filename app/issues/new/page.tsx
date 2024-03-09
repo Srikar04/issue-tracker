@@ -8,14 +8,23 @@ import { MdError } from "react-icons/md";
 
 import { useForm } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
+import {z} from 'zod';
 import axios from 'axios';
 
 import { useRouter } from 'next/navigation';
 import {useState} from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CreateIssueSchema } from '@/app/validationSchemas';
+import ErrorMessage from '@/app/components/ErrorMessage';
 
 const newIssue = () => {
 
-  const {register,control,handleSubmit} = useForm();
+  type Issue = z.infer<typeof CreateIssueSchema>
+
+  const {register,control,handleSubmit,formState:{errors}} = useForm<Issue>({
+     resolver : zodResolver(CreateIssueSchema)
+  });
+
   const router = useRouter();
 
   const [error,setError] = useState("");
@@ -45,6 +54,9 @@ const newIssue = () => {
             <TextField.Root>
                 <TextField.Input placeholder="Title" {...register("title")}/>
             </TextField.Root>
+            <ErrorMessage>
+              {errors.title?.message}
+            </ErrorMessage>
             <Controller 
               name="description"
               control={control}
@@ -52,6 +64,9 @@ const newIssue = () => {
                 <SimpleMDE placeholder="Enter the description of the issue" {...field}/>
               )}
             />
+            <ErrorMessage>
+              {errors.description?.message}
+            </ErrorMessage>
             <Button>Create new Issue</Button>
         </form>
     </div>
