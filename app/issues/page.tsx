@@ -1,7 +1,7 @@
 import prisma from '@/prisma/client';
 import { Table } from '@radix-ui/themes';
 import IssueStatusBadge from '../components/IssueStatusBadge';
-import CustomLink from './CustomLink';
+import CustomLink from '../components/CustomLink';
 import IssueActions from './IssueActions';
 import delay from 'delay';
 
