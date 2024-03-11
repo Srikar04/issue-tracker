@@ -1,8 +1,8 @@
-import React,{ReactNode, PropsWithChildren } from 'react';
-import {Text} from '@radix-ui/themes';
+import React, { ReactNode, PropsWithChildren } from 'react';
+import { Text } from '@radix-ui/themes';
 
-const ErrorMessage = ( {children}: PropsWithChildren) => {
-  if(!children)
+const ErrorMessage = ({ children }: PropsWithChildren) => {
+  if (!children)
     return;
   return (
     <Text color="red" as="p">{children}</Text>

@@ -3,13 +3,13 @@ import { Badge } from '@radix-ui/themes'
 import React from 'react'
 
 
-const statusMap : Record< Status,{label: String, color: "green" | "yellow" | "red"}>  = {
-    OPEN: {label: "Open", color: "green"},
-    IN_PROGRESS: {label: "In Progress", color: "yellow"},
-    CLOSED: {label: "Closed", color: "red"},
+const statusMap: Record<Status, { label: String, color: "green" | "yellow" | "red" }> = {
+  OPEN: { label: "Open", color: "green" },
+  IN_PROGRESS: { label: "In Progress", color: "yellow" },
+  CLOSED: { label: "Closed", color: "red" },
 }
 
-const IssueStatusBadge = ({status} : {status: Status}) => {
+const IssueStatusBadge = ({ status }: { status: Status }) => {
   return (
     <div>
       <Badge color={statusMap[status].color}>
