@@ -28,24 +28,24 @@ const newIssue = async () => {
 
   type Issue = z.infer<typeof CreateIssueSchema>
 
-  const {register,control,handleSubmit,formState:{errors,isSubmitting}} = useForm<Issue>({
-     resolver : zodResolver(CreateIssueSchema)
+  const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<Issue>({
+    resolver: zodResolver(CreateIssueSchema)
   });
 
   const router = useRouter();
 
-  const [error,setError] = useState("");
+  const [error, setError] = useState("");
   // const [isSubmitting,setIsSubmitting] = useState(false);
 
 
   const submitForm = async (data: object) => {
     //  setIsSubmitting(true);
-     await axios.post('/api/issues',data).
-     then(response => router.push('/issues')).
-     catch((error) => {
+    await axios.post('/api/issues', data).
+      then(response => router.push('/issues')).
+      catch((error) => {
         // setIsSubmitting(false);
         setError("An error occurred while creating the issue. Please try again.")
-     });
+      });
   }
 
   return (
@@ -57,28 +57,28 @@ const newIssue = async () => {
           </Callout.Icon>
           <Callout.Text>
             {error}
-          </Callout.Text> 
+          </Callout.Text>
         </Callout.Root>
       }
-        <form className = "space-y-4" onSubmit={handleSubmit(submitForm)}>
-            <TextField.Root>
-                <TextField.Input placeholder="Title" {...register("title")}/>
-            </TextField.Root>
-            <ErrorMessage>
-              {errors.title?.message}
-            </ErrorMessage>
-            <Controller 
-              name="description"
-              control={control}
-              render={({ field }) => (
-                <SimpleMDE placeholder="Enter the description of the issue" {...field}/>
-              )}
-            />
-            <ErrorMessage>
-              {errors.description?.message}
-            </ErrorMessage>
-            <Button disabled={isSubmitting}>Create new Issue { isSubmitting && <Spinner/>}</Button>
-        </form>
+      <form className="space-y-4" onSubmit={handleSubmit(submitForm)}>
+        <TextField.Root>
+          <TextField.Input placeholder="Title" {...register("title")} />
+        </TextField.Root>
+        <ErrorMessage>
+          {errors.title?.message}
+        </ErrorMessage>
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => (
+            <SimpleMDE placeholder="Enter the description of the issue" {...field} />
+          )}
+        />
+        <ErrorMessage>
+          {errors.description?.message}
+        </ErrorMessage>
+        <Button disabled={isSubmitting}>Create new Issue {isSubmitting && <Spinner />}</Button>
+      </form>
     </div>
   )
 }

@@ -4,7 +4,6 @@ import { Link as RadixLink } from '@radix-ui/themes';
 import { FiExternalLink } from "react-icons/fi";
 
 
-
 interface Props {
    href: string;
    children: string

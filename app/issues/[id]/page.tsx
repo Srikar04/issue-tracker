@@ -6,22 +6,22 @@ import React from 'react'
 import Markdown from 'react-markdown';
 import delay from 'delay';
 
-interface Props{
-    params : { id : string},
+interface Props {
+    params: { id: string },
 }
 
 
-const Issue = async ({params} : Props) => {
+const Issue = async ({ params }: Props) => {
 
     // await delay(3000);
 
     const issue = await prisma.issue.findUnique({
         where: {
-              id: parseInt(params.id)
+            id: parseInt(params.id)
         }
     });
 
-    if(!issue)
+    if (!issue)
         notFound();
 
     return (
