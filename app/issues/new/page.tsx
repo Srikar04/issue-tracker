@@ -2,8 +2,8 @@
 
 import { Button, Callout, TextField } from '@radix-ui/themes';
 import "easymde/dist/easymde.min.css";
-import { MdError } from "react-icons/md";
 import dynamic from 'next/dynamic';
+import { MdError } from "react-icons/md";
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
   ssr: false,
@@ -19,7 +19,6 @@ import { CreateIssueSchema } from '@/app/validationSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import delay from 'delay';
 
 
 
