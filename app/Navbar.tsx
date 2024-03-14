@@ -10,7 +10,7 @@ import classNames from 'classnames';
 const Navbar = () => {
   let arr = [
     { href: "/", label: "DashBoard" },
-    { href: "/issues", label: "Issues" }
+    { href: "/issues/list", label: "Issues" }
   ]
   const [isClientRendered, setIsClientRendered] = React.useState(false);
 
