@@ -5,9 +5,14 @@ import React, { useEffect } from 'react'
 import { IoBugSharp } from "react-icons/io5";
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
+import { useSession } from 'next-auth/react';
+import { Box } from '@radix-ui/themes';
 
 
 const Navbar = () => {
+
+  const { status, data: session } = useSession();
+
   let arr = [
     { href: "/", label: "DashBoard" },
     { href: "/issues/list", label: "Issues" }
@@ -44,6 +49,12 @@ const Navbar = () => {
           </li>
         )}
       </ul>
+      <Box>
+        {status === "authenticated" ?
+          <Link href="/api/auth/signout">Log Out</Link> :
+          <Link href="/api/auth/signin">Log In</Link>
+        }
+      </Box>
     </nav>
   )
 }
