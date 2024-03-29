@@ -13,10 +13,7 @@ const AuthOptions: NextAuthOptions = {
     ],
     session: {
         strategy: "jwt",
-    },
-    pages: {
-        signOut: '/',
-    },
+    }
 };
 
 export default AuthOptions
