@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IoBugSharp } from "react-icons/io5";
 import Skeleton from '@/app/components/Skeleton';
 
@@ -63,6 +63,8 @@ const AuthStatus = () => {
     )
   }
 
+  console.log(session?.user!.image!);
+
   return (
     <Box>
       <DropdownMenu.Root>
@@ -73,6 +75,7 @@ const AuthStatus = () => {
             radius='full'
             size='2'
             className="cursor-pointer"
+            referrerPolicy="no-referrer"
           />
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
