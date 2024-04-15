@@ -5,8 +5,8 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-    const session = await getServerSession(authOptions);
-    if (!session) return NextResponse.json({}, { status: 401 });
+    // const session = await getServerSession(authOptions);
+    // if (!session) return NextResponse.json({}, { status: 401 });
     const body = await req.json();
     const validation = patchIssueSchema.safeParse(body);
     if (!validation.success) {

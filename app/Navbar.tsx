@@ -63,8 +63,6 @@ const AuthStatus = () => {
     )
   }
 
-  console.log(session?.user!.image!);
-
   return (
     <Box>
       <DropdownMenu.Root>
