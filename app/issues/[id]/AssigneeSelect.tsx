@@ -1,13 +1,11 @@
 'use client'
 
-import React from 'react'
-import { Select } from "@radix-ui/themes";
-import { Issue, User } from '@prisma/client';
-import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
 import Skeleton from '@/app/components/Skeleton';
+import { Issue, User } from '@prisma/client';
+import { Select } from "@radix-ui/themes";
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import Toast, { Toaster } from 'react-hot-toast';
-import IssueDetails from './IssueDetails';
 
 
 /*
@@ -19,15 +17,15 @@ background to sync the data with the server.
 
 const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 
-    const { data: users, error, isLoading } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            const { data } = await axios.get<User[]>("/api/users");
-            return data;
-        },
-        staleTime: 60 * 1000, //60s
-        retry: 3
-    });
+    const { data: users, error, isLoading } = useUsers();
+
+    const assignUser = (userId: String) => {
+        axios.patch("/api/issues/" + issue.id, {
+            assignedToUserId: userId != "none" ? userId : null,
+        }).catch((error) => {
+            Toast.error("Failed to assign user");
+        });
+    };
 
     if (isLoading) return <Skeleton />
 
@@ -35,14 +33,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
 
     return (
         <>
-            <Select.Root defaultValue={issue.assignedToUserId || "none"} onValueChange={(userId) => {
-                console.log(issue.id, userId);
-                axios.patch("/api/issues/" + issue.id, {
-                    assignedToUserId: userId != "none" ? userId : null,
-                }).catch((error) => {
-                    Toast.error("Failed to assign user");
-                });
-            }}>
+            <Select.Root defaultValue={issue.assignedToUserId || "none"} onValueChange={assignUser}>
                 <Select.Trigger placeholder="Assign to User" />
                 <Select.Content>
                     <Select.Group>
@@ -60,5 +51,15 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         </>
     )
 }
+
+const useUsers = () => useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+        const { data } = await axios.get<User[]>("/api/users");
+        return data;
+    },
+    staleTime: 60 * 1000, //60s
+    retry: 3
+});
 
 export default AssigneeSelect
